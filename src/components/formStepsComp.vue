@@ -1,6 +1,9 @@
 <template>
   <div id="mainDiv">
-    <div id="s1" v-if="this.stepOne == 1">
+   <router-view name="Form1">
+
+   </router-view>
+    <!--<div id="s1" v-if="this.stepOne == 1">
       <h3>Wybierz jednostkę</h3>
       <div
         v-for="i in this.tab"
@@ -44,16 +47,17 @@
         <itemBar :name="i.text" />
       </div>
     </div>
+    -->
   </div>
 </template>
 
 <script>
-import itemBar from "@/components/itemBar.vue";
+//import itemBar from "@/components/itemBar.vue";
 export default {
   name: "formStepsDiv",
-  components: {
+  /*components: {
     itemBar,
-  },
+  },*/
   computed: {
     stepOne() {
       return this.$store.state.stepOne;
@@ -63,6 +67,15 @@ export default {
     stepOneInc: function () {
       this.$store.commit("stepOneInc");
     },
+    myFun(){
+      console.log("click back");
+    }
+  },
+    mounted () {
+    document.addEventListener("backbutton", this.myFun, false);
+  },
+  beforeDestroy () {
+    document.removeEventListener("backbutton", this.myFun);
   },
   data() {
     return {
